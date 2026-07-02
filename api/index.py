@@ -1,6 +1,9 @@
 from http.server import BaseHTTPRequestHandler
 import json
-
+key = self.headers.get("X_API_KEY")
+if key !="kingzal":
+    self.send_error(403, "lau sape mpruy")
+    return
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
