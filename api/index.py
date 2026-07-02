@@ -1,22 +1,26 @@
 from http.server import BaseHTTPRequestHandler
 import json
-key = self.headers.get("X_API_KEY")
-if key !="kingzal":
-    self.send_error(403, "lau sape mpruy")
-    return
+import os # Jangan lupa import os
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        # Mengambil kunci dari Environment Variable Vercel
+        RAHASIA_DARI_VERCEL = os.environ.get('KEY') 
+        
+        # Mengambil kunci yang dikirim oleh bot/user
+        key_pengguna = self.headers.get("X-API-KEY")
+        
+        # Pengecekan
+        if key_pengguna != RAHASIA_DARI_VERCEL:
+            self.send_error(403, "Akses ditolak!")
+            return
+
+        # Jika sukses, kirim data
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
         
-        # Contoh data yang akan dikirim ke aplikasi lain
-        data = {
-            "status": "success",
-            "pesan": "Halo! API ini sekarang berjalan di Vercel.",
-            "data": [{"id": 1, "nama": "Contoh Data"}]
-        }
-        
+        data = {"status": "success", "pesan": "Kunci benar, akses diberikan!"}
         self.wfile.write(json.dumps(data).encode())
         return
-      
+        
