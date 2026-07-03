@@ -14,8 +14,8 @@ class handler(BaseHTTPRequestHandler):
         data = {
         "status" : "success connect API"
         "data_info" : [
-        {"id" : 1, "nama" : "dani", "umur" : 29}
-        {"id" : 2, "nama" : "bacok", "umur" : 24}
+        {"id": 1, "nama": "dani", "umur": 29},
+        {"id": 2, "nama": "bacok", "umur" : 24}
         ]
         }
         
